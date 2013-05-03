@@ -1,0 +1,19 @@
+[Desktop Entry]
+Name=Young Digital Poland Dictionary
+Name[pl]=Słownik Young Digital Poland
+Comment=Plasma interface for YDP Collins and Langenscheidt dictionaries
+Comment[pl]=Interfejs plasmy dla słowników YDP Collins i Langenscheidt
+Type=Service
+ServiceTypes=Plasma/Applet
+Icon=accessories-dictionary.png
+ 
+X-KDE-Library=plasma_applet_ydpd
+X-KDE-PluginInfo-Author=Marcin Nawrocki
+X-KDE-PluginInfo-Email=mar.nawrocki@gmail.com
+X-KDE-PluginInfo-Name=plasma_applet_ydpd
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=
+X-KDE-PluginInfo-Category=Language
+X-KDE-PluginInfo-Depends=libydpdict2
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true

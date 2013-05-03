@@ -1,0 +1,20 @@
+<RCC>
+    <qresource prefix="/">
+        <file>res/de.png</file>
+        <file>res/en.png</file>
+        <file>res/pl.png</file>
+        <file>res/apport.svg</file>
+        <file>res/arrow-left.png</file>
+        <file>res/arrow-right.png</file>
+        <file>res/fifteenpuzzle.svgz</file>
+        <file>res/text-speak.png</file>
+        <file>res/preferences-desktop-mouse.png</file>
+        <file>res/document-encrypt.png</file>
+        <file>res/document-open.png</file>
+        <file>res/document-save.png</file>
+        <file>res/fork.png</file>
+        <file>res/configure.png</file>
+        <file>res/drive-harddisk.png</file>
+        <file>res/accessories-dictionary.png</file>
+    </qresource>
+</RCC>
