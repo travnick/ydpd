@@ -55,7 +55,7 @@ IDictionary* IDictionary::createInstance(int version, QString dictionaryPath)
 }
 
 Dictionary::Dictionary(int version, QString dictionaryPath):
-    _dictData(NULL),
+    _dictData(nullptr),
     _version(version),
     _dictionaryPath(dictionaryPath)
 {
@@ -141,6 +141,6 @@ void Dictionary::close()
     if (_dictData)
     {
         ydpdict_close(_dictData);
-        _dictData = NULL;
+        _dictData = nullptr;
     }
 }

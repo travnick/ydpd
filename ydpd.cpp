@@ -63,7 +63,7 @@ void Ydpd::init()
     list.append(confMan.config().getSplitters().first);
     list.append(confMan.config().getSplitters().second);
     ui->splitter->setSizes(list);
-    ui->historyComboBox->setCompleter(NULL);
+    ui->historyComboBox->setCompleter(nullptr);
 
     IDictManager& dictMan = IDictManager::instance();
     ui->entriesListView->setModel(dictMan.entriesModel());

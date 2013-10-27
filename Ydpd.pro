@@ -10,6 +10,8 @@ QMAKE_CXXFLAGS += -std=c++11 -Wall -Wextra -Winline -Winvalid-pch \
     -Wctor-dtor-privacy -Wold-style-cast -Woverloaded-virtual -Wformat=2 \
     -Wshadow -pedantic # -Weffc++
 
+QMAKE_CFLAGS += -std=c11
+
 TARGET = ydpd
 TEMPLATE = app
 
