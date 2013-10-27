@@ -27,14 +27,14 @@ ConfigTabDialog::ConfigTabDialog(QWidget *parent) :
     QDialog(parent)
 {
     QWidget *pStartupWidget = new QWidget;
-    m_startupForm.setupUi(pStartupWidget);
+    _startupForm.setupUi(pStartupWidget);
 
     QWidget *pHistoryWidget = new QWidget;
-    m_historyForm.setupUi(pHistoryWidget);
+    _historyForm.setupUi(pHistoryWidget);
 
     QTabWidget *pTabWidget = new QTabWidget;
     pTabWidget->addTab(pStartupWidget, QIcon(":/res/fork.png"), "Start");
-    pTabWidget->addTab(&m_pathsWidget, QIcon(":/res/drive-harddisk.png"), QString::fromUtf8("Ścieżki"));
+    pTabWidget->addTab(&_pathsWidget, QIcon(":/res/drive-harddisk.png"), QString::fromUtf8("Ścieżki"));
     pTabWidget->addTab(pHistoryWidget, QIcon(":/res/document-save.png"), "Historia");
     pTabWidget->setUsesScrollButtons(false);
 
@@ -52,12 +52,12 @@ ConfigTabDialog::ConfigTabDialog(QWidget *parent) :
     foreach (int version, DictInstance::versionList())
     {
         const DictInst& instance = DictInstance::dictInst(version);
-        m_pathsWidget.addDictionary(instance.foreignIconName(),
+        _pathsWidget.addDictionary(instance.foreignIconName(),
                                     instance.description(), version);
-        m_startupForm.selectedComboBox->addItem(QIcon(instance.foreignIconName()),
+        _startupForm.selectedComboBox->addItem(QIcon(instance.foreignIconName()),
                                                 instance.description(),
                                                 QVariant(version+YdpTypes::Foreign));
-        m_startupForm.selectedComboBox->addItem(QIcon(instance.nativeIconName()),
+        _startupForm.selectedComboBox->addItem(QIcon(instance.nativeIconName()),
                                                 instance.description(),
                                                 QVariant(version+YdpTypes::Native));
     }
@@ -67,29 +67,29 @@ void ConfigTabDialog::setConfig(const Config& config)
 {
     foreach (int version, DictInstance::versionList())
     {
-        m_pathsWidget.setDictionaryPath(version, config.dictionaryPath(version));
-        m_pathsWidget.setSamplesPath(version, config.samplesPath(version));
+        _pathsWidget.setDictionaryPath(version, config.dictionaryPath(version));
+        _pathsWidget.setSamplesPath(version, config.samplesPath(version));
     }
-    (config.dictionaryToOpen() ? m_startupForm.selectedRadioButton : m_startupForm.recentlyUsedRadioButton)->setChecked(true);
-    int index = m_startupForm.selectedComboBox->findData(config.selectedDictionary());
-    m_startupForm.selectedComboBox->setCurrentIndex(index);
-    m_historyForm.historyCheckBox->setChecked(config.storeHistory());
-    m_historyForm.noOfItemsSpinBox->setValue(config.maxNumberOfHistoryItems());
-    m_pathsWidget.on_dictionaryComboBox_currentIndexChanged(0);
-    m_config = config;
+    (config.dictionaryToOpen() ? _startupForm.selectedRadioButton : _startupForm.recentlyUsedRadioButton)->setChecked(true);
+    int index = _startupForm.selectedComboBox->findData(config.selectedDictionary());
+    _startupForm.selectedComboBox->setCurrentIndex(index);
+    _historyForm.historyCheckBox->setChecked(config.storeHistory());
+    _historyForm.noOfItemsSpinBox->setValue(config.maxNumberOfHistoryItems());
+    _pathsWidget.on_dictionaryComboBox_currentIndexChanged(0);
+    _config = config;
 }
 
 Config ConfigTabDialog::config()
 {
-    m_config.setDictionaryToOpen(m_startupForm.selectedRadioButton->isChecked());
-    int index = m_startupForm.selectedComboBox->currentIndex();
-    m_config.setSelectedDictionary(m_startupForm.selectedComboBox->itemData(index).toInt());
-    m_config.setStoreHistory(m_historyForm.historyCheckBox->isChecked());
-    m_config.setMaxNumberOfHistoryItems(m_historyForm.noOfItemsSpinBox->value());
+    _config.setDictionaryToOpen(_startupForm.selectedRadioButton->isChecked());
+    int index = _startupForm.selectedComboBox->currentIndex();
+    _config.setSelectedDictionary(_startupForm.selectedComboBox->itemData(index).toInt());
+    _config.setStoreHistory(_historyForm.historyCheckBox->isChecked());
+    _config.setMaxNumberOfHistoryItems(_historyForm.noOfItemsSpinBox->value());
     foreach (int version, DictInstance::versionList())
     {
-        m_config.setDictionaryPath(version, m_pathsWidget.dictionaryPath(version));
-        m_config.setSamplesPath(version, m_pathsWidget.samplesPath(version));
+        _config.setDictionaryPath(version, _pathsWidget.dictionaryPath(version));
+        _config.setSamplesPath(version, _pathsWidget.samplesPath(version));
     }
-    return m_config;
+    return _config;
 }

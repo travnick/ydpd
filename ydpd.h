@@ -66,7 +66,7 @@ private slots:
     void onDictionaryChanged(int type);
     void updateCheckboxes(bool enable = true);
 private:
-    QTimer m_addItemToHistoryTimer;
+    QTimer _addItemToHistoryTimer;
     Ui::Ydpd *ui;
     void initWidgets();
     void createMenu();
@@ -92,11 +92,11 @@ private:
     void moveEvent (QMoveEvent* event);
     void resizeEvent (QResizeEvent* event);
     QString wavFilePath(int index);
-    QAction *m_clipboardAction;
-    QAction *m_selfSelectionAction;
-    QAction *m_alwaysOnTopAction;
-    QAction *m_autoShowWindowAction;
-    const static int m_addItemToHistoryTimerInterval;
+    QAction *_clipboardAction;
+    QAction *_selfSelectionAction;
+    QAction *_alwaysOnTopAction;
+    QAction *_autoShowWindowAction;
+    const static int _addItemToHistoryTimerInterval;
 };
 
 #endif // YDPD_H

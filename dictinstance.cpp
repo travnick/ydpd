@@ -21,25 +21,25 @@
 #include "ydptypes.h"
 
 DictInst::DictInst(QString description, QString toolTip, QString foreignIconName, QString nativeIconName, QString wavFormat)
-    : m_description(description),
-      m_toolTip(toolTip),
-      m_wavFormat(wavFormat)
+    : _description(description),
+      _toolTip(toolTip),
+      _wavFormat(wavFormat)
 {
-    m_iconName[YdpTypes::Foreign] = foreignIconName;
-    m_iconName[YdpTypes::Native]  = nativeIconName;
+    _iconName[YdpTypes::Foreign] = foreignIconName;
+    _iconName[YdpTypes::Native]  = nativeIconName;
 }
 
 QString DictInst::foreignIconName() const
 {
-    return m_iconName[YdpTypes::Foreign];
+    return _iconName[YdpTypes::Foreign];
 }
 
 QString DictInst::nativeIconName() const
 {
-    return m_iconName[YdpTypes::Native];
+    return _iconName[YdpTypes::Native];
 }
 
-const VersionToDictInstMap DictInstance::m_instances = DictInstance::mapInit();
+const VersionToDictInstMap DictInstance::_instances = DictInstance::mapInit();
 
 VersionToDictInstMap DictInstance::mapInit()
 {

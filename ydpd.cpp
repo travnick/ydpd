@@ -34,7 +34,7 @@
 #include <QFile>
 #include <QMenu>
 
-const int Ydpd::m_addItemToHistoryTimerInterval  = 2000;
+const int Ydpd::_addItemToHistoryTimerInterval  = 2000;
 
 Ydpd::Ydpd(QWidget *parent) :
     QWidget(parent),
@@ -73,20 +73,20 @@ void Ydpd::init()
     createMenu();
     initWidgets();
 
-    m_clipboardAction->setChecked(confMan.config().clipboard());
-    m_selfSelectionAction->setChecked(confMan.config().selfSelection());
-    m_alwaysOnTopAction->setChecked(confMan.config().alwaysOnTop());
-    m_autoShowWindowAction->setChecked(confMan.config().autoShowWindow());
+    _clipboardAction->setChecked(confMan.config().clipboard());
+    _selfSelectionAction->setChecked(confMan.config().selfSelection());
+    _alwaysOnTopAction->setChecked(confMan.config().alwaysOnTop());
+    _autoShowWindowAction->setChecked(confMan.config().autoShowWindow());
 
     QShortcut *changeDictShortcut = new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_D), this);
     connect(changeDictShortcut, SIGNAL(activated()), this, SLOT(changeDictionary()));
     QShortcut *clearLineEditShortcut = new QShortcut(QKeySequence(Qt::Key_Escape), this);
     connect(clearLineEditShortcut, SIGNAL(activated()), this, SLOT(clearLineEdit()));
 
-    m_addItemToHistoryTimer.setSingleShot(true);
-    m_addItemToHistoryTimer.setInterval(m_addItemToHistoryTimerInterval);
+    _addItemToHistoryTimer.setSingleShot(true);
+    _addItemToHistoryTimer.setInterval(_addItemToHistoryTimerInterval);
 
-    connect(&m_addItemToHistoryTimer, SIGNAL(timeout()), this, SLOT(timeout()));
+    connect(&_addItemToHistoryTimer, SIGNAL(timeout()), this, SLOT(timeout()));
     connect(ui->historyComboBox->lineEdit(), SIGNAL(returnPressed()), this, SLOT(lineEdit_returnPressed()));
     connect(QApplication::clipboard(), SIGNAL(dataChanged()), this, SLOT(dataChanged()));
     connect(QApplication::clipboard(), SIGNAL(selectionChanged()), this, SLOT(selectionChanged()));
@@ -99,30 +99,30 @@ void Ydpd::createMenu()
 {
     QMenu *menu = new QMenu(this);
 
-    m_clipboardAction = new QAction(QIcon(":/res/fifteenpuzzle.svgz"), QString::fromUtf8("Śledź schowek"), this);
-    connect(m_clipboardAction, SIGNAL(toggled(bool)), this, SLOT(updateCheckboxes()));
-    connect(m_clipboardAction, SIGNAL(toggled(bool)), &IConfigManager::instance(), SLOT(onClipboardChanged(bool)));
-    m_clipboardAction->setCheckable(true);
-    menu->addAction(m_clipboardAction);
+    _clipboardAction = new QAction(QIcon(":/res/fifteenpuzzle.svgz"), QString::fromUtf8("Śledź schowek"), this);
+    connect(_clipboardAction, SIGNAL(toggled(bool)), this, SLOT(updateCheckboxes()));
+    connect(_clipboardAction, SIGNAL(toggled(bool)), &IConfigManager::instance(), SLOT(onClipboardChanged(bool)));
+    _clipboardAction->setCheckable(true);
+    menu->addAction(_clipboardAction);
 
-    m_selfSelectionAction = new QAction(QIcon(":/res/preferences-desktop-mouse.png"), QString::fromUtf8("Śledź własne zaznaczenia"), this);
-    connect(m_selfSelectionAction, SIGNAL(toggled(bool)), &IConfigManager::instance(), SLOT(onSelfSelectionChanged(bool)));
-    m_selfSelectionAction->setCheckable(true);
-    menu->addAction(m_selfSelectionAction);
-    m_selfSelectionAction->setVisible(QApplication::clipboard()->supportsSelection());
+    _selfSelectionAction = new QAction(QIcon(":/res/preferences-desktop-mouse.png"), QString::fromUtf8("Śledź własne zaznaczenia"), this);
+    connect(_selfSelectionAction, SIGNAL(toggled(bool)), &IConfigManager::instance(), SLOT(onSelfSelectionChanged(bool)));
+    _selfSelectionAction->setCheckable(true);
+    menu->addAction(_selfSelectionAction);
+    _selfSelectionAction->setVisible(QApplication::clipboard()->supportsSelection());
 
-    m_alwaysOnTopAction = new QAction(QIcon(":/res/document-encrypt.png"), QString::fromUtf8("Zawsze na wierzchu"), this);
-    connect(m_alwaysOnTopAction, SIGNAL(toggled(bool)), this, SLOT(alwaysOnTop_stateChanged(bool)));
-    connect(m_alwaysOnTopAction, SIGNAL(toggled(bool)), &IConfigManager::instance(), SLOT(onAlwaysOnTopChanged(bool)));
-    m_alwaysOnTopAction->setCheckable(true);
-    menu->addAction(m_alwaysOnTopAction);
+    _alwaysOnTopAction = new QAction(QIcon(":/res/document-encrypt.png"), QString::fromUtf8("Zawsze na wierzchu"), this);
+    connect(_alwaysOnTopAction, SIGNAL(toggled(bool)), this, SLOT(alwaysOnTop_stateChanged(bool)));
+    connect(_alwaysOnTopAction, SIGNAL(toggled(bool)), &IConfigManager::instance(), SLOT(onAlwaysOnTopChanged(bool)));
+    _alwaysOnTopAction->setCheckable(true);
+    menu->addAction(_alwaysOnTopAction);
     
-    m_autoShowWindowAction = new QAction(QIcon(":/res/apport.svg"), QString::fromUtf8("Automatycznie pokaż okno"), this);
-    connect(m_autoShowWindowAction, SIGNAL(toggled(bool)), &IConfigManager::instance(), SLOT(onAutoShowWindowChanged(bool)));
-    m_autoShowWindowAction->setCheckable(true);
-    menu->addAction(m_autoShowWindowAction);
+    _autoShowWindowAction = new QAction(QIcon(":/res/apport.svg"), QString::fromUtf8("Automatycznie pokaż okno"), this);
+    connect(_autoShowWindowAction, SIGNAL(toggled(bool)), &IConfigManager::instance(), SLOT(onAutoShowWindowChanged(bool)));
+    _autoShowWindowAction->setCheckable(true);
+    menu->addAction(_autoShowWindowAction);
 #ifndef PLASMA
-    m_autoShowWindowAction->setVisible(false);
+    _autoShowWindowAction->setVisible(false);
 #endif
 
     menu->addSeparator();
@@ -190,10 +190,10 @@ void Ydpd::enableWidgets(bool enable)
                                              ui->historyComboBox->currentIndex() != -1);
     ui->nextToolButton->setEnabled(enable && ui->historyComboBox->currentIndex() != ui->historyComboBox->count()-1);
     enablePlayButton(ui->entriesListView->currentIndex().row());
-    m_clipboardAction->setEnabled(enable);
-    m_selfSelectionAction->setEnabled(enable);
-    m_alwaysOnTopAction->setEnabled(enable);
-    m_autoShowWindowAction->setEnabled(enable);
+    _clipboardAction->setEnabled(enable);
+    _selfSelectionAction->setEnabled(enable);
+    _alwaysOnTopAction->setEnabled(enable);
+    _autoShowWindowAction->setEnabled(enable);
     updateCheckboxes(enable);
 }
 
@@ -211,10 +211,10 @@ void Ydpd::clearWidgets()
     ui->prevToolButton->setChecked(false);
     ui->nextToolButton->setChecked(false);
     ui->playToolButton->setChecked(false);
-    m_alwaysOnTopAction->setChecked(false);
-    m_clipboardAction->setChecked(false);
-    m_selfSelectionAction->setChecked(false);
-    m_autoShowWindowAction->setChecked(false);
+    _alwaysOnTopAction->setChecked(false);
+    _clipboardAction->setChecked(false);
+    _selfSelectionAction->setChecked(false);
+    _autoShowWindowAction->setChecked(false);
 }
 
 void Ydpd::historyComboBoxInit()
@@ -272,7 +272,7 @@ void Ydpd::foreignRadioButtonSetIconAndTooltip()
 
 void Ydpd::entriesListView_clicked(const QModelIndex& index)
 {
-    m_addItemToHistoryTimer.stop();
+    _addItemToHistoryTimer.stop();
     disconnectSignalsFromSlots();
     const int entryIndex = index.row();
     ui->historyComboBox->setEditText(IDictManager::instance().entriesText(index.row()));
@@ -306,7 +306,7 @@ void Ydpd::dictionaryComboBox_currentIndexChanged(int index)
 
 void Ydpd::lineEdit_textEdited(const QString& text)
 {
-    m_addItemToHistoryTimer.start();
+    _addItemToHistoryTimer.start();
     const int entryIndex = IDictManager::instance().entryToIndex(text);
     const int index = ui->entriesListView->currentIndex().row();
     if (index != entryIndex)
@@ -367,9 +367,9 @@ void Ydpd::radioButtonToggled(bool checked)
 
 void Ydpd::lineEdit_returnPressed()
 {
-    if (m_addItemToHistoryTimer.isActive())
+    if (_addItemToHistoryTimer.isActive())
     {
-        m_addItemToHistoryTimer.stop();
+        _addItemToHistoryTimer.stop();
         addCurrentEntryToHistory();
     }
 }
@@ -408,19 +408,19 @@ void Ydpd::enablePrevNextButtons(int historyEntryIndex)
 
 void Ydpd::dataChanged()
 {
-    if (m_clipboardAction->isChecked())
+    if (_clipboardAction->isChecked())
     {
-        m_addItemToHistoryTimer.stop();
+        _addItemToHistoryTimer.stop();
         handleClipboardChange(QClipboard::Clipboard);
     }
 }
 
 void Ydpd::selectionChanged()
 {
-    if (m_clipboardAction->isChecked() ||
-       (m_selfSelectionAction->isChecked() && ui->descriptionTextEdit->textCursor().hasSelection()))
+    if (_clipboardAction->isChecked() ||
+       (_selfSelectionAction->isChecked() && ui->descriptionTextEdit->textCursor().hasSelection()))
     {
-        m_addItemToHistoryTimer.stop();
+        _addItemToHistoryTimer.stop();
         handleClipboardChange(QClipboard::Selection);
     }
 }
@@ -434,7 +434,7 @@ void Ydpd::handleClipboardChange(QClipboard::Mode mode)
     entriesListViewSetIndex(entryIndex);
     descriptionTextEditSetContents(entryIndex);
     setFocusOnLineEdit();
-    if (m_clipboardAction->isChecked() && m_autoShowWindowAction->isChecked() && !m_alwaysOnTopAction->isChecked())
+    if (_clipboardAction->isChecked() && _autoShowWindowAction->isChecked() && !_alwaysOnTopAction->isChecked())
         emit clipboardChanged();
 }
 
@@ -547,8 +547,8 @@ void Ydpd::about()
 
 void Ydpd::updateCheckboxes(bool enable)
 {
-    m_clipboardAction->setEnabled(enable);
-    m_selfSelectionAction->setEnabled(enable && !m_clipboardAction->isChecked());
-    m_alwaysOnTopAction->setEnabled(enable);
-    m_autoShowWindowAction->setEnabled(enable && !m_alwaysOnTopAction->isChecked() && m_clipboardAction->isChecked());
+    _clipboardAction->setEnabled(enable);
+    _selfSelectionAction->setEnabled(enable && !_clipboardAction->isChecked());
+    _alwaysOnTopAction->setEnabled(enable);
+    _autoShowWindowAction->setEnabled(enable && !_alwaysOnTopAction->isChecked() && _clipboardAction->isChecked());
 }

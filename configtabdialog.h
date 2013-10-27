@@ -34,10 +34,10 @@ public:
     void setConfig(const Config& config);
     Config config();
 private:
-    Ui_startupForm m_startupForm;
-    Ui_historyForm m_historyForm;
-    PathsWidget m_pathsWidget;
-    Config m_config;
+    Ui_startupForm _startupForm;
+    Ui_historyForm _historyForm;
+    PathsWidget _pathsWidget;
+    Config _config;
 };
 
 #endif // CONFIGTABDIALOG_H

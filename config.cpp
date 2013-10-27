@@ -22,32 +22,32 @@
 
 Config::Config()
 {
-    m_dictionaryToOpen = Recent;
-    m_recentDictionary = YdpTypes::CollinsForeign;
-    m_selectedDictionary = YdpTypes::CollinsForeign;
-    m_maxNumberOfHistoryItems = 10;
-    m_storeHistory = 1;
-    m_clipboard = 0;
-    m_window = 0;
-    m_selfSelection = 0;
-    m_alwaysOnTop = 0;
-    m_autoShowWindow = 0;
-    m_geometry = QRect(100, 100, 440, 280);
-    m_sizes = QPair<int, int>(139, 278);
+    _dictionaryToOpen = Recent;
+    _recentDictionary = YdpTypes::CollinsForeign;
+    _selectedDictionary = YdpTypes::CollinsForeign;
+    _maxNumberOfHistoryItems = 10;
+    _storeHistory = 1;
+    _clipboard = 0;
+    _window = 0;
+    _selfSelection = 0;
+    _alwaysOnTop = 0;
+    _autoShowWindow = 0;
+    _geometry = QRect(100, 100, 440, 280);
+    _sizes = QPair<int, int>(139, 278);
 }
 
 void Config::insertHistoryItem(QString text, int type)
 {
-    m_history.insert(0, HistoryItem(text, type));
-    const int count = m_history.count();
-    if (count > m_maxNumberOfHistoryItems)
-        m_history.removeAt(count - 1);
+    _history.insert(0, HistoryItem(text, type));
+    const int count = _history.count();
+    if (count > _maxNumberOfHistoryItems)
+        _history.removeAt(count - 1);
 }
 
 void Config::appendHistoryItem(QString text, int type)
 {
-    m_history.append(HistoryItem(text, type));
-    const int count = m_history.count();
-    if (count > m_maxNumberOfHistoryItems)
-        m_history.removeAt(0);
+    _history.append(HistoryItem(text, type));
+    const int count = _history.count();
+    if (count > _maxNumberOfHistoryItems)
+        _history.removeAt(0);
 }

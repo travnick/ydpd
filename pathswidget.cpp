@@ -23,21 +23,21 @@
 PathsWidget::PathsWidget(QWidget *parent) :
     QWidget(parent)
 {
-    m_pathsForm.setupUi(this);
+    _pathsForm.setupUi(this);
 }
 
 void PathsWidget::on_dictionaryComboBox_currentIndexChanged(int index)
 {
-    int version = m_pathsForm.dictionaryComboBox->itemData(index).toInt();
-    m_pathsForm.dictDirLineEdit->setText(m_dataFilesPath[version]);
-    m_pathsForm.dictDirLineEdit->home(false);
-    m_pathsForm.sampleDirLineEdit->setText(m_voiceSamplesPath[version]);
-    m_pathsForm.sampleDirLineEdit->home(false);
+    int version = _pathsForm.dictionaryComboBox->itemData(index).toInt();
+    _pathsForm.dictDirLineEdit->setText(_dataFilesPath[version]);
+    _pathsForm.dictDirLineEdit->home(false);
+    _pathsForm.sampleDirLineEdit->setText(_voiceSamplesPath[version]);
+    _pathsForm.sampleDirLineEdit->home(false);
 }
 
 void PathsWidget::addDictionary(QString iconName, QString description, int version)
 {
-    m_pathsForm.dictionaryComboBox->addItem(QIcon(iconName), description, QVariant(version));
+    _pathsForm.dictionaryComboBox->addItem(QIcon(iconName), description, QVariant(version));
 }
 
 void PathsWidget::setUserSelectedPath(VersionToStringMap& stringMap, QLineEdit* lineEdit)
@@ -47,19 +47,19 @@ void PathsWidget::setUserSelectedPath(VersionToStringMap& stringMap, QLineEdit* 
     if (fileDialog.exec() == QDialog::Accepted)
     {
         QString path = QDir::toNativeSeparators(fileDialog.directory().path());
-        int index = m_pathsForm.dictionaryComboBox->currentIndex();
+        int index = _pathsForm.dictionaryComboBox->currentIndex();
         lineEdit->setText(path);
-        int version = m_pathsForm.dictionaryComboBox->itemData(index).toInt();
+        int version = _pathsForm.dictionaryComboBox->itemData(index).toInt();
         stringMap[version] = path;
     }
 }
 
 void PathsWidget::on_dictDirToolButton_clicked()
 {
-    setUserSelectedPath(m_dataFilesPath, m_pathsForm.dictDirLineEdit);
+    setUserSelectedPath(_dataFilesPath, _pathsForm.dictDirLineEdit);
 }
 
 void PathsWidget::on_sampleDirToolButton_clicked()
 {
-    setUserSelectedPath(m_voiceSamplesPath, m_pathsForm.sampleDirLineEdit);
+    setUserSelectedPath(_voiceSamplesPath, _pathsForm.sampleDirLineEdit);
 }

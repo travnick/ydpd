@@ -29,17 +29,17 @@ class DictInst
 public:
     DictInst(QString description, QString toolTip, QString foreignIconName, QString nativeIconName, QString wavFormat);
     DictInst() {}
-    QString description() const { return m_description; }
-    QString toolTip() const { return m_toolTip; }
-    QString iconName(int direction) const { return m_iconName[direction]; }
+    QString description() const { return _description; }
+    QString toolTip() const { return _toolTip; }
+    QString iconName(int direction) const { return _iconName[direction]; }
     QString foreignIconName() const;
     QString nativeIconName() const;
-    QString wavFormat() const { return m_wavFormat; }
+    QString wavFormat() const { return _wavFormat; }
 private:
-    QString m_description;
-    QString m_toolTip;
-    QString m_iconName[2];
-    QString m_wavFormat;
+    QString _description;
+    QString _toolTip;
+    QString _iconName[2];
+    QString _wavFormat;
 };
 
 typedef QMap<int, DictInst> VersionToDictInstMap;
@@ -50,16 +50,16 @@ class DictInstance
 public:
     static const DictInst dictInst(int version)
     {
-        return m_instances[version];
+        return _instances[version];
     }
     static const VersionList versionList()
     {
-        return m_instances.keys();
+        return _instances.keys();
     }
 
 private:
     DictInstance() {}
-    static const VersionToDictInstMap m_instances;
+    static const VersionToDictInstMap _instances;
     static VersionToDictInstMap mapInit();
 };
 

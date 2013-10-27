@@ -42,7 +42,7 @@ public slots:
 protected:
     IConfigManager() {}
     virtual ~IConfigManager() {}
-    Config m_config;
+    Config _config;
 };
 
 #endif // CONFIGMANAGER_H

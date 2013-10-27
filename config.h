@@ -29,26 +29,26 @@
 class HistoryItem
 {
 public:
-    HistoryItem(QString text, int type) : m_text(text), m_type(type) {}
-    QString text() const { return m_text; }
-    int type() const { return m_type; }
+    HistoryItem(QString text, int type) : _text(text), _type(type) {}
+    QString text() const { return _text; }
+    int type() const { return _type; }
 private:
     HistoryItem() {}
-    QString m_text;
-    int     m_type;
+    QString _text;
+    int     _type;
 };
 
 class Paths
 {
 public:
     Paths() {}
-    void setDictionary(QString dictionary) { m_dictionary = dictionary; }
-    QString dictionary() const { return m_dictionary; }
-    void setSamples(QString samples) { m_samples = samples; }
-    QString samples() const { return m_samples; }
+    void setDictionary(QString dictionary) { _dictionary = dictionary; }
+    QString dictionary() const { return _dictionary; }
+    void setSamples(QString samples) { _samples = samples; }
+    QString samples() const { return _samples; }
 private:
-    QString m_dictionary;
-    QString m_samples;
+    QString _dictionary;
+    QString _samples;
 };
 
 typedef QList<HistoryItem> HistoryList;
@@ -61,49 +61,49 @@ public:
     Config();
     void insertHistoryItem(QString text, int type);
     void appendHistoryItem(QString text, int type);
-    void setDictionaryPath(int version, QString path) { m_paths[version].setDictionary(path); }
-    QString dictionaryPath(int version) const { return m_paths[version].dictionary(); }
-    void setSamplesPath(int version, QString path) { m_paths[version].setSamples(path); }
-    QString samplesPath(int version) const { return m_paths[version].samples(); }
-    VersionList versionList() const { return m_paths.keys(); }
-    void setDictionaryToOpen(int value) { m_dictionaryToOpen = value; }
-    int dictionaryToOpen() const { return m_dictionaryToOpen; }
-    void setRecentDictionary(int version) { m_recentDictionary = version; }
-    int recentDictionary() const { return m_recentDictionary; }
-    void setSelectedDictionary(int version) { m_selectedDictionary = version; }
-    int selectedDictionary() const { return m_selectedDictionary; }
-    void setMaxNumberOfHistoryItems(int value) { m_maxNumberOfHistoryItems = value; }
-    int maxNumberOfHistoryItems() const { return m_maxNumberOfHistoryItems; }
-    void setStoreHistory(int value) { m_storeHistory = value; }
-    int storeHistory() const { return m_storeHistory; }
-    const HistoryList& history() const { return m_history; }
-    void setGeometry(QRect rect) { m_geometry = rect; }
-    QRect geometry() const { return m_geometry; }
-    void setSplitters(QPair<int, int> sizes) { m_sizes = sizes; }
-    QPair<int, int> getSplitters() const { return m_sizes; }
-    void setClipboard(bool enabled) { m_clipboard = enabled; }
-    bool clipboard() const { return m_clipboard; }
-    void setSelfSelection(bool enabled) { m_selfSelection = enabled; }
-    bool selfSelection() const { return m_selfSelection; }
-    void setAlwaysOnTop(bool enabled) { m_alwaysOnTop = enabled; }
-    bool alwaysOnTop() const { return m_alwaysOnTop; }
-    void setAutoShowWindow(bool enabled) { m_autoShowWindow = enabled; }
-    bool autoShowWindow() const { return m_autoShowWindow; }
+    void setDictionaryPath(int version, QString path) { _paths[version].setDictionary(path); }
+    QString dictionaryPath(int version) const { return _paths[version].dictionary(); }
+    void setSamplesPath(int version, QString path) { _paths[version].setSamples(path); }
+    QString samplesPath(int version) const { return _paths[version].samples(); }
+    VersionList versionList() const { return _paths.keys(); }
+    void setDictionaryToOpen(int value) { _dictionaryToOpen = value; }
+    int dictionaryToOpen() const { return _dictionaryToOpen; }
+    void setRecentDictionary(int version) { _recentDictionary = version; }
+    int recentDictionary() const { return _recentDictionary; }
+    void setSelectedDictionary(int version) { _selectedDictionary = version; }
+    int selectedDictionary() const { return _selectedDictionary; }
+    void setMaxNumberOfHistoryItems(int value) { _maxNumberOfHistoryItems = value; }
+    int maxNumberOfHistoryItems() const { return _maxNumberOfHistoryItems; }
+    void setStoreHistory(int value) { _storeHistory = value; }
+    int storeHistory() const { return _storeHistory; }
+    const HistoryList& history() const { return _history; }
+    void setGeometry(QRect rect) { _geometry = rect; }
+    QRect geometry() const { return _geometry; }
+    void setSplitters(QPair<int, int> sizes) { _sizes = sizes; }
+    QPair<int, int> getSplitters() const { return _sizes; }
+    void setClipboard(bool enabled) { _clipboard = enabled; }
+    bool clipboard() const { return _clipboard; }
+    void setSelfSelection(bool enabled) { _selfSelection = enabled; }
+    bool selfSelection() const { return _selfSelection; }
+    void setAlwaysOnTop(bool enabled) { _alwaysOnTop = enabled; }
+    bool alwaysOnTop() const { return _alwaysOnTop; }
+    void setAutoShowWindow(bool enabled) { _autoShowWindow = enabled; }
+    bool autoShowWindow() const { return _autoShowWindow; }
 private:
-    VersionToPathMap m_paths;
-    int m_dictionaryToOpen;
-    int m_recentDictionary;
-    int m_selectedDictionary;
-    int m_maxNumberOfHistoryItems;
-    int m_storeHistory;
-    int m_clipboard;
-    int m_window;
-    int m_selfSelection;
-    int m_alwaysOnTop;
-    int m_autoShowWindow;
-    HistoryList m_history;
-    QRect m_geometry;
-    QPair<int, int> m_sizes;
+    VersionToPathMap _paths;
+    int _dictionaryToOpen;
+    int _recentDictionary;
+    int _selectedDictionary;
+    int _maxNumberOfHistoryItems;
+    int _storeHistory;
+    int _clipboard;
+    int _window;
+    int _selfSelection;
+    int _alwaysOnTop;
+    int _autoShowWindow;
+    HistoryList _history;
+    QRect _geometry;
+    QPair<int, int> _sizes;
 };
 
 #endif // CONFIG_H

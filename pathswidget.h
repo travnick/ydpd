@@ -31,15 +31,15 @@ class PathsWidget : public QWidget
     Q_OBJECT
 public:
     explicit PathsWidget(QWidget *parent = 0);
-    QString dictionaryPath(int version) { return m_dataFilesPath[version]; }
-    void setDictionaryPath(int version, QString path) { m_dataFilesPath[version] = path; }
-    QString samplesPath(int version) { return m_voiceSamplesPath[version]; }
-    void setSamplesPath(int version, QString path) { m_voiceSamplesPath[version] = path; }
+    QString dictionaryPath(int version) { return _dataFilesPath[version]; }
+    void setDictionaryPath(int version, QString path) { _dataFilesPath[version] = path; }
+    QString samplesPath(int version) { return _voiceSamplesPath[version]; }
+    void setSamplesPath(int version, QString path) { _voiceSamplesPath[version] = path; }
     void addDictionary(QString iconName, QString description, int version);
 private:
-    Ui::pathsForm m_pathsForm;
-    VersionToStringMap m_dataFilesPath;
-    VersionToStringMap m_voiceSamplesPath;
+    Ui::pathsForm _pathsForm;
+    VersionToStringMap _dataFilesPath;
+    VersionToStringMap _voiceSamplesPath;
     void setUserSelectedPath(VersionToStringMap& stringMap, QLineEdit* lineEdit);
 public slots:
     void on_dictionaryComboBox_currentIndexChanged(int index);

@@ -39,10 +39,10 @@ private:
     bool open(int direction);
     void close();
     void initDirection(int direction);
-    ydpdict_t* m_dictData;
-    DirectionToStringListMap m_entries;
-    int m_version;
-    QString m_dictionaryPath;
+    ydpdict_t* _dictData;
+    DirectionToStringListMap _entries;
+    int _version;
+    QString _dictionaryPath;
 public slots:
     void initialize(int version, QString dictionaryPath);
 protected:
@@ -55,9 +55,9 @@ IDictionary* IDictionary::createInstance(int version, QString dictionaryPath)
 }
 
 Dictionary::Dictionary(int version, QString dictionaryPath):
-    m_dictData(NULL),
-    m_version(version),
-    m_dictionaryPath(dictionaryPath)
+    _dictData(NULL),
+    _version(version),
+    _dictionaryPath(dictionaryPath)
 {
     initDirection(YdpTypes::Foreign);
     initDirection(YdpTypes::Native);
@@ -76,13 +76,13 @@ bool Dictionary::isValid()
 
 const QStringList& Dictionary::entries(int direction)
 {
-    return m_entries[direction];
+    return _entries[direction];
 }
 
 QString Dictionary::description(int direction, int index)
 {
     if (open(direction))
-        return QString::fromUtf8(ydpdict_read_xhtml(m_dictData, index));
+        return QString::fromUtf8(ydpdict_read_xhtml(_dictData, index));
 
     return "";
 }
@@ -92,7 +92,7 @@ int Dictionary::entryToIndex(int direction, QString entry)
     int index = -1;
 
     if (open(direction))
-        while ((index = ydpdict_find_word(m_dictData, entry.toUtf8())) == -1)
+        while ((index = ydpdict_find_word(_dictData, entry.toUtf8())) == -1)
             entry.chop(1);
 
     return index;
@@ -100,9 +100,9 @@ int Dictionary::entryToIndex(int direction, QString entry)
 
 void Dictionary::initialize(int version, QString dictionaryPath)
 {
-    if (version == m_version)
+    if (version == _version)
     {
-        m_dictionaryPath = dictionaryPath;
+        _dictionaryPath = dictionaryPath;
         initDirection(YdpTypes::Foreign);
         initDirection(YdpTypes::Native);
     }
@@ -110,37 +110,37 @@ void Dictionary::initialize(int version, QString dictionaryPath)
 
 void Dictionary::initDirection(int direction)
 {
-    m_entries[direction].clear();
+    _entries[direction].clear();
     if (open(direction))
     {
-        const int count = ydpdict_get_count(m_dictData);
+        const int count = ydpdict_get_count(_dictData);
         for (int index=0; index<count; index++)
-            m_entries[direction].append(QString::fromUtf8(ydpdict_get_word(m_dictData, index)));
+            _entries[direction].append(QString::fromUtf8(ydpdict_get_word(_dictData, index)));
     }
 }
 
 bool Dictionary::open(int direction)
 {
-    QString datFile = m_dictionaryPath + QString("/dict%1.dat").arg(m_version+direction);
-    QString idxFile = m_dictionaryPath + QString("/dict%1.idx").arg(m_version+direction);
+    QString datFile = _dictionaryPath + QString("/dict%1.dat").arg(_version+direction);
+    QString idxFile = _dictionaryPath + QString("/dict%1.idx").arg(_version+direction);
 
     close();
-    m_dictData = ydpdict_open(datFile.toAscii(), idxFile.toAscii(), YDPDICT_ENCODING_UTF8);
-    if (!m_dictData)
+    _dictData = ydpdict_open(datFile.toAscii(), idxFile.toAscii(), YDPDICT_ENCODING_UTF8);
+    if (!_dictData)
     {
-        datFile = m_dictionaryPath + QString("/dict%1.dat").toUpper().arg(m_version+direction);
-        idxFile = m_dictionaryPath + QString("/dict%1.idx").toUpper().arg(m_version+direction);
-        m_dictData = ydpdict_open(datFile.toAscii(), idxFile.toAscii(), YDPDICT_ENCODING_UTF8);
+        datFile = _dictionaryPath + QString("/dict%1.dat").toUpper().arg(_version+direction);
+        idxFile = _dictionaryPath + QString("/dict%1.idx").toUpper().arg(_version+direction);
+        _dictData = ydpdict_open(datFile.toAscii(), idxFile.toAscii(), YDPDICT_ENCODING_UTF8);
     }
 
-    return m_dictData;
+    return _dictData;
 }
 
 void Dictionary::close()
 {
-    if (m_dictData)
+    if (_dictData)
     {
-        ydpdict_close(m_dictData);
-        m_dictData = NULL;
+        ydpdict_close(_dictData);
+        _dictData = NULL;
     }
 }

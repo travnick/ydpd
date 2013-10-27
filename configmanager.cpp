@@ -32,10 +32,10 @@ public:
 signals:
     void dictionaryDirectoryChanged(int version, QString dictionaryPath);
 public slots:
-    void onClipboardChanged(bool clipboard) { m_config.setClipboard(clipboard); }
-    void onSelfSelectionChanged(bool selfSelection) { m_config.setSelfSelection(selfSelection); }
-    void onAlwaysOnTopChanged(bool alwaysOnTop) { m_config.setAlwaysOnTop(alwaysOnTop); }
-    void onAutoShowWindowChanged(bool autoShowWindow) { m_config.setAutoShowWindow(autoShowWindow); }
+    void onClipboardChanged(bool clipboard) { _config.setClipboard(clipboard); }
+    void onSelfSelectionChanged(bool selfSelection) { _config.setSelfSelection(selfSelection); }
+    void onAlwaysOnTopChanged(bool alwaysOnTop) { _config.setAlwaysOnTop(alwaysOnTop); }
+    void onAutoShowWindowChanged(bool autoShowWindow) { _config.setAutoShowWindow(autoShowWindow); }
 private:
     static bool loadStartup(QDomElement& root, Config& config);
     static bool loadHistory(QDomElement& root, Config& config);
@@ -43,75 +43,75 @@ private:
     static bool loadOptions(QDomElement& root, Config& config);
     static bool loadGeometry(QDomElement& root, Config& config);
     static bool loadSplitters(QDomElement& root, Config& config);
-    const static QString m_configFileName;
-    const static QString m_mainTagName;
-    const static QString m_startupTagName;
-    const static QString m_dictToOpenAttribName;
-    const static QString m_recentDictAttribName;
-    const static QString m_selectedDictAttribName;
-    const static QString m_historyTagName;
-    const static QString m_historyEnabledAttribName;
-    const static QString m_maxHistoryItemsAttribName;
-    const static QString m_historyItemTagName;
-    const static QString m_historyItemTypeAttribName;
-    const static QString m_historyItemTextAttribName;
-    const static QString m_dictTagName;
-    const static QString m_dictVersionAttribName;
-    const static QString m_dictDataPathAttribName;
-    const static QString m_dictSamplesPathAttribName;
-    const static QString m_optionsTagName;
-    const static QString m_clipboardAttribName;
-    const static QString m_selfSelectionAttribName;
-    const static QString m_alwaysOnTopAttribName;
-    const static QString m_autoShowWindowAttribName;
-    const static QString m_geometryTagName;
-    const static QString m_geometryXAttribName;
-    const static QString m_geometryYAttribName;
-    const static QString m_geometryWidthAttribName;
-    const static QString m_geometryHeightAttribName;
-    const static QString m_splittersTagName;
-    const static QString m_leftSplitterAttribName;
-    const static QString m_rightSplitterAttribName;
+    const static QString _configFileName;
+    const static QString _mainTagName;
+    const static QString _startupTagName;
+    const static QString _dictToOpenAttribName;
+    const static QString _recentDictAttribName;
+    const static QString _selectedDictAttribName;
+    const static QString _historyTagName;
+    const static QString _historyEnabledAttribName;
+    const static QString _maxHistoryItemsAttribName;
+    const static QString _historyItemTagName;
+    const static QString _historyItemTypeAttribName;
+    const static QString _historyItemTextAttribName;
+    const static QString _dictTagName;
+    const static QString _dictVersionAttribName;
+    const static QString _dictDataPathAttribName;
+    const static QString _dictSamplesPathAttribName;
+    const static QString _optionsTagName;
+    const static QString _clipboardAttribName;
+    const static QString _selfSelectionAttribName;
+    const static QString _alwaysOnTopAttribName;
+    const static QString _autoShowWindowAttribName;
+    const static QString _geometryTagName;
+    const static QString _geometryXAttribName;
+    const static QString _geometryYAttribName;
+    const static QString _geometryWidthAttribName;
+    const static QString _geometryHeightAttribName;
+    const static QString _splittersTagName;
+    const static QString _leftSplitterAttribName;
+    const static QString _rightSplitterAttribName;
 };
 
-const QString ConfigManager::m_configFileName = ".ydpd.xml";
-const QString ConfigManager::m_mainTagName = "YdpdConfig";
-const QString ConfigManager::m_startupTagName = "Startup";
-const QString ConfigManager::m_dictToOpenAttribName = "open";
-const QString ConfigManager::m_recentDictAttribName = "recent";
-const QString ConfigManager::m_selectedDictAttribName = "selected";
-const QString ConfigManager::m_historyTagName = "History";
-const QString ConfigManager::m_historyEnabledAttribName = "enabled";
-const QString ConfigManager::m_maxHistoryItemsAttribName = "maxItems";
-const QString ConfigManager::m_historyItemTagName = "Item";
-const QString ConfigManager::m_historyItemTypeAttribName = "type";
-const QString ConfigManager::m_historyItemTextAttribName = "text";
-const QString ConfigManager::m_dictTagName = "Dictionary";
-const QString ConfigManager::m_dictVersionAttribName = "version";
-const QString ConfigManager::m_dictDataPathAttribName = "data";
-const QString ConfigManager::m_dictSamplesPathAttribName = "samples";
-const QString ConfigManager::m_optionsTagName = "Options";
-const QString ConfigManager::m_clipboardAttribName = "clipboard";
-const QString ConfigManager::m_selfSelectionAttribName = "selfSelection";
-const QString ConfigManager::m_alwaysOnTopAttribName = "alwaysOnTop";
-const QString ConfigManager::m_autoShowWindowAttribName = "autoShowWindow";
-const QString ConfigManager::m_geometryTagName = "Geometry";
-const QString ConfigManager::m_geometryXAttribName = "x";
-const QString ConfigManager::m_geometryYAttribName = "y";
-const QString ConfigManager::m_geometryWidthAttribName = "width";
-const QString ConfigManager::m_geometryHeightAttribName = "height";
-const QString ConfigManager::m_splittersTagName = "Sizes";
-const QString ConfigManager::m_leftSplitterAttribName = "a";
-const QString ConfigManager::m_rightSplitterAttribName = "b";
+const QString ConfigManager::_configFileName = ".ydpd.xml";
+const QString ConfigManager::_mainTagName = "YdpdConfig";
+const QString ConfigManager::_startupTagName = "Startup";
+const QString ConfigManager::_dictToOpenAttribName = "open";
+const QString ConfigManager::_recentDictAttribName = "recent";
+const QString ConfigManager::_selectedDictAttribName = "selected";
+const QString ConfigManager::_historyTagName = "History";
+const QString ConfigManager::_historyEnabledAttribName = "enabled";
+const QString ConfigManager::_maxHistoryItemsAttribName = "maxItems";
+const QString ConfigManager::_historyItemTagName = "Item";
+const QString ConfigManager::_historyItemTypeAttribName = "type";
+const QString ConfigManager::_historyItemTextAttribName = "text";
+const QString ConfigManager::_dictTagName = "Dictionary";
+const QString ConfigManager::_dictVersionAttribName = "version";
+const QString ConfigManager::_dictDataPathAttribName = "data";
+const QString ConfigManager::_dictSamplesPathAttribName = "samples";
+const QString ConfigManager::_optionsTagName = "Options";
+const QString ConfigManager::_clipboardAttribName = "clipboard";
+const QString ConfigManager::_selfSelectionAttribName = "selfSelection";
+const QString ConfigManager::_alwaysOnTopAttribName = "alwaysOnTop";
+const QString ConfigManager::_autoShowWindowAttribName = "autoShowWindow";
+const QString ConfigManager::_geometryTagName = "Geometry";
+const QString ConfigManager::_geometryXAttribName = "x";
+const QString ConfigManager::_geometryYAttribName = "y";
+const QString ConfigManager::_geometryWidthAttribName = "width";
+const QString ConfigManager::_geometryHeightAttribName = "height";
+const QString ConfigManager::_splittersTagName = "Sizes";
+const QString ConfigManager::_leftSplitterAttribName = "a";
+const QString ConfigManager::_rightSplitterAttribName = "b";
 
 ConfigManager::ConfigManager()
 {
 #ifdef DEBUG
     bool value = load();
+    Q_ASSERT(value);
 #else
     load();
 #endif
-    Q_ASSERT(value);
 }
 
 ConfigManager::~ConfigManager()
@@ -121,24 +121,24 @@ ConfigManager::~ConfigManager()
 
 Config& ConfigManager::config()
 {
-    return m_config;
+    return _config;
 }
 
 bool ConfigManager::loadStartup(QDomElement& root, Config& config)
 {
-    QDomNodeList list = root.elementsByTagName(m_startupTagName);
+    QDomNodeList list = root.elementsByTagName(_startupTagName);
     if (list.length() != 1)
         return false;
     QDomElement element = list.item(0).toElement();
-    QDomAttr attribute = element.attributeNode(m_dictToOpenAttribName);
+    QDomAttr attribute = element.attributeNode(_dictToOpenAttribName);
     if (attribute.isNull())
         return false;
     config.setDictionaryToOpen(attribute.value().toInt());
-    attribute = element.attributeNode(m_recentDictAttribName);
+    attribute = element.attributeNode(_recentDictAttribName);
     if (attribute.isNull())
         return false;
     config.setRecentDictionary(attribute.value().toInt());
-    attribute = element.attributeNode(m_selectedDictAttribName);
+    attribute = element.attributeNode(_selectedDictAttribName);
     if (attribute.isNull())
         return false;
     config.setSelectedDictionary(attribute.value().toInt());
@@ -148,25 +148,25 @@ bool ConfigManager::loadStartup(QDomElement& root, Config& config)
 
 bool ConfigManager::loadHistory(QDomElement& root, Config& config)
 {
-    QDomNodeList list = root.elementsByTagName(m_historyTagName);
+    QDomNodeList list = root.elementsByTagName(_historyTagName);
     if (list.length() != 1)
         return false;
     QDomElement element = list.item(0).toElement();
-    QDomAttr attribute = element.attributeNode(m_historyEnabledAttribName);
+    QDomAttr attribute = element.attributeNode(_historyEnabledAttribName);
     if (attribute.isNull())
         return false;
     config.setStoreHistory(attribute.value().toInt());
-    attribute = element.attributeNode(m_maxHistoryItemsAttribName);
+    attribute = element.attributeNode(_maxHistoryItemsAttribName);
     if (attribute.isNull())
         return false;
     config.setMaxNumberOfHistoryItems(attribute.value().toInt());
-    list = element.elementsByTagName(m_historyItemTagName);
+    list = element.elementsByTagName(_historyItemTagName);
     for (uint index = 0; index < list.length() && index < (uint)config.maxNumberOfHistoryItems(); index++)
     {
         element = list.item(index).toElement();
-        if (!element.hasAttribute(m_historyItemTypeAttribName) || !element.hasAttribute(m_historyItemTextAttribName))
+        if (!element.hasAttribute(_historyItemTypeAttribName) || !element.hasAttribute(_historyItemTextAttribName))
             return false;
-        config.appendHistoryItem(element.attribute(m_historyItemTextAttribName), element.attribute(m_historyItemTypeAttribName).toInt());
+        config.appendHistoryItem(element.attribute(_historyItemTextAttribName), element.attribute(_historyItemTypeAttribName).toInt());
     }
 
     return true;
@@ -174,14 +174,14 @@ bool ConfigManager::loadHistory(QDomElement& root, Config& config)
 
 bool ConfigManager::loadDictionary(QDomElement& root, Config& config)
 {
-    QDomNodeList list = root.elementsByTagName(m_dictTagName);
+    QDomNodeList list = root.elementsByTagName(_dictTagName);
     for (uint index = 0; index < list.length(); index++)
     {
         QDomElement element = list.item(index).toElement();
-        if (!element.hasAttribute(m_dictVersionAttribName) || !element.hasAttribute(m_dictDataPathAttribName) || !element.hasAttribute(m_dictSamplesPathAttribName))
+        if (!element.hasAttribute(_dictVersionAttribName) || !element.hasAttribute(_dictDataPathAttribName) || !element.hasAttribute(_dictSamplesPathAttribName))
             return false;
-        config.setDictionaryPath(element.attribute(m_dictVersionAttribName).toInt(), element.attribute(m_dictDataPathAttribName));
-        config.setSamplesPath(element.attribute(m_dictVersionAttribName).toInt(), element.attribute(m_dictSamplesPathAttribName));
+        config.setDictionaryPath(element.attribute(_dictVersionAttribName).toInt(), element.attribute(_dictDataPathAttribName));
+        config.setSamplesPath(element.attribute(_dictVersionAttribName).toInt(), element.attribute(_dictSamplesPathAttribName));
     }
 
     return true;
@@ -189,23 +189,23 @@ bool ConfigManager::loadDictionary(QDomElement& root, Config& config)
 
 bool ConfigManager::loadOptions(QDomElement& root, Config& config)
 {
-    QDomNodeList list = root.elementsByTagName(m_optionsTagName);
+    QDomNodeList list = root.elementsByTagName(_optionsTagName);
     if (list.length() != 1)
         return false;
     QDomElement element = list.item(0).toElement();
-    QDomAttr attribute = element.attributeNode(m_clipboardAttribName);
+    QDomAttr attribute = element.attributeNode(_clipboardAttribName);
     if (attribute.isNull())
         return false;
     config.setClipboard(attribute.value().toInt());
-    attribute = element.attributeNode(m_selfSelectionAttribName);
+    attribute = element.attributeNode(_selfSelectionAttribName);
     if (attribute.isNull())
         return false;
     config.setSelfSelection(attribute.value().toInt());
-    attribute = element.attributeNode(m_alwaysOnTopAttribName);
+    attribute = element.attributeNode(_alwaysOnTopAttribName);
     if (attribute.isNull())
         return false;
     config.setAlwaysOnTop(attribute.value().toInt());
-    attribute = element.attributeNode(m_autoShowWindowAttribName);
+    attribute = element.attributeNode(_autoShowWindowAttribName);
     if (attribute.isNull())
         return false;
     config.setAutoShowWindow(attribute.value().toInt());
@@ -216,23 +216,23 @@ bool ConfigManager::loadOptions(QDomElement& root, Config& config)
 bool ConfigManager::loadGeometry(QDomElement& root, Config& config)
 {
     QRect geometry;
-    QDomNodeList list = root.elementsByTagName(m_geometryTagName);
+    QDomNodeList list = root.elementsByTagName(_geometryTagName);
     if (list.length() != 1)
         return false;
     QDomElement element = list.item(0).toElement();
-    QDomAttr attribute = element.attributeNode(m_geometryXAttribName);
+    QDomAttr attribute = element.attributeNode(_geometryXAttribName);
     if (attribute.isNull())
         return false;
     geometry.setX(attribute.value().toInt());
-    attribute = element.attributeNode(m_geometryYAttribName);
+    attribute = element.attributeNode(_geometryYAttribName);
     if (attribute.isNull())
         return false;
     geometry.setY(attribute.value().toInt());
-    attribute = element.attributeNode(m_geometryHeightAttribName);
+    attribute = element.attributeNode(_geometryHeightAttribName);
     if (attribute.isNull())
         return false;
     geometry.setHeight(attribute.value().toInt());
-    attribute = element.attributeNode(m_geometryWidthAttribName);
+    attribute = element.attributeNode(_geometryWidthAttribName);
     if (attribute.isNull())
         return false;
     geometry.setWidth(attribute.value().toInt());
@@ -244,15 +244,15 @@ bool ConfigManager::loadGeometry(QDomElement& root, Config& config)
 bool ConfigManager::loadSplitters(QDomElement& root, Config& config)
 {
     QPair<int, int> sizes;
-    QDomNodeList list = root.elementsByTagName(m_splittersTagName);
+    QDomNodeList list = root.elementsByTagName(_splittersTagName);
     if (list.length() != 1)
         return false;
     QDomElement element = list.item(0).toElement();
-    QDomAttr attribute = element.attributeNode(m_leftSplitterAttribName);
+    QDomAttr attribute = element.attributeNode(_leftSplitterAttribName);
     if (attribute.isNull())
         return false;
     sizes.first = attribute.value().toInt();
-    attribute = element.attributeNode(m_rightSplitterAttribName);
+    attribute = element.attributeNode(_rightSplitterAttribName);
     if (attribute.isNull())
         return false;
     sizes.second = attribute.value().toInt();
@@ -264,7 +264,7 @@ bool ConfigManager::loadSplitters(QDomElement& root, Config& config)
 bool ConfigManager::load()
 {
     QDomDocument config;
-    QFile configFile(QDir::homePath()+"/"+m_configFileName);
+    QFile configFile(QDir::homePath()+"/"+_configFileName);
     if (!configFile.open(QIODevice::ReadOnly))
         return false;
     if (!config.setContent(&configFile))
@@ -275,25 +275,25 @@ bool ConfigManager::load()
     configFile.close();
 
     QDomElement root = config.documentElement();
-    if (root.tagName() != m_mainTagName)
+    if (root.tagName() != _mainTagName)
         return false;
 
-    if (!loadStartup(root, m_config))
+    if (!loadStartup(root, _config))
         return false;
 
-    if (!loadHistory(root, m_config))
+    if (!loadHistory(root, _config))
         return false;
 
-    if (!loadDictionary(root, m_config))
+    if (!loadDictionary(root, _config))
         return false;
 
-    if (!loadOptions(root, m_config))
+    if (!loadOptions(root, _config))
         return false;
 
-    if (!loadGeometry(root, m_config))
+    if (!loadGeometry(root, _config))
         return false;
 
-    if (!loadSplitters(root, m_config))
+    if (!loadSplitters(root, _config))
         return false;
 
     return true;
@@ -306,56 +306,56 @@ bool ConfigManager::save() const
     QDomNode node(config.createProcessingInstruction("xml", "version=\"1.0\" encoding=\"utf-8\""));
     config.insertBefore(node, config.firstChild());
 
-    QDomElement root = config.createElement(m_mainTagName);
+    QDomElement root = config.createElement(_mainTagName);
     config.appendChild(root);
 
-    QDomElement element = config.createElement(m_startupTagName);
-    element.setAttribute(m_dictToOpenAttribName, m_config.dictionaryToOpen());
-    element.setAttribute(m_recentDictAttribName, m_config.recentDictionary());
-    element.setAttribute(m_selectedDictAttribName, m_config.selectedDictionary());
+    QDomElement element = config.createElement(_startupTagName);
+    element.setAttribute(_dictToOpenAttribName, _config.dictionaryToOpen());
+    element.setAttribute(_recentDictAttribName, _config.recentDictionary());
+    element.setAttribute(_selectedDictAttribName, _config.selectedDictionary());
     root.appendChild(element);
 
-    element = config.createElement(m_historyTagName);
-    element.setAttribute(m_historyEnabledAttribName, m_config.storeHistory());
-    element.setAttribute(m_maxHistoryItemsAttribName, m_config.maxNumberOfHistoryItems());
-    for (int index = 0; index < m_config.history().length() && index < m_config.maxNumberOfHistoryItems() && m_config.storeHistory(); index++)
+    element = config.createElement(_historyTagName);
+    element.setAttribute(_historyEnabledAttribName, _config.storeHistory());
+    element.setAttribute(_maxHistoryItemsAttribName, _config.maxNumberOfHistoryItems());
+    for (int index = 0; index < _config.history().length() && index < _config.maxNumberOfHistoryItems() && _config.storeHistory(); index++)
     {
-        QDomElement subElement = config.createElement(m_historyItemTagName);
-        subElement.setAttribute(m_historyItemTypeAttribName, m_config.history().at(index).type());
-        subElement.setAttribute(m_historyItemTextAttribName, m_config.history().at(index).text());
+        QDomElement subElement = config.createElement(_historyItemTagName);
+        subElement.setAttribute(_historyItemTypeAttribName, _config.history().at(index).type());
+        subElement.setAttribute(_historyItemTextAttribName, _config.history().at(index).text());
         element.appendChild(subElement);
     }
     root.appendChild(element);
 
-    foreach (int version, m_config.versionList())
+    foreach (int version, _config.versionList())
     {
-        element = config.createElement(m_dictTagName);
-        element.setAttribute(m_dictVersionAttribName, version);
-        element.setAttribute(m_dictDataPathAttribName, m_config.dictionaryPath(version));
-        element.setAttribute(m_dictSamplesPathAttribName, m_config.samplesPath(version));
+        element = config.createElement(_dictTagName);
+        element.setAttribute(_dictVersionAttribName, version);
+        element.setAttribute(_dictDataPathAttribName, _config.dictionaryPath(version));
+        element.setAttribute(_dictSamplesPathAttribName, _config.samplesPath(version));
         root.appendChild(element);
     }
 
-    element = config.createElement(m_optionsTagName);
-    element.setAttribute(m_clipboardAttribName, m_config.clipboard());
-    element.setAttribute(m_selfSelectionAttribName, m_config.selfSelection());
-    element.setAttribute(m_alwaysOnTopAttribName, m_config.alwaysOnTop());
-    element.setAttribute(m_autoShowWindowAttribName, m_config.autoShowWindow());
+    element = config.createElement(_optionsTagName);
+    element.setAttribute(_clipboardAttribName, _config.clipboard());
+    element.setAttribute(_selfSelectionAttribName, _config.selfSelection());
+    element.setAttribute(_alwaysOnTopAttribName, _config.alwaysOnTop());
+    element.setAttribute(_autoShowWindowAttribName, _config.autoShowWindow());
     root.appendChild(element);
 
-    element = config.createElement(m_geometryTagName);
-    element.setAttribute(m_geometryXAttribName, m_config.geometry().x());
-    element.setAttribute(m_geometryYAttribName, m_config.geometry().y());
-    element.setAttribute(m_geometryWidthAttribName, m_config.geometry().width());
-    element.setAttribute(m_geometryHeightAttribName, m_config.geometry().height());
+    element = config.createElement(_geometryTagName);
+    element.setAttribute(_geometryXAttribName, _config.geometry().x());
+    element.setAttribute(_geometryYAttribName, _config.geometry().y());
+    element.setAttribute(_geometryWidthAttribName, _config.geometry().width());
+    element.setAttribute(_geometryHeightAttribName, _config.geometry().height());
     root.appendChild(element);
 
-    element = config.createElement(m_splittersTagName);
-    element.setAttribute(m_leftSplitterAttribName, m_config.getSplitters().first);
-    element.setAttribute(m_rightSplitterAttribName, m_config.getSplitters().second);
+    element = config.createElement(_splittersTagName);
+    element.setAttribute(_leftSplitterAttribName, _config.getSplitters().first);
+    element.setAttribute(_rightSplitterAttribName, _config.getSplitters().second);
     root.appendChild(element);
 
-    QFile configFile(QDir::homePath()+"/"+m_configFileName);
+    QFile configFile(QDir::homePath()+"/"+_configFileName);
     if (!configFile.open(QIODevice::WriteOnly))
         return false;
     QTextStream textStream(&configFile);
@@ -377,5 +377,5 @@ void IConfigManager::setConfig(const Config& config)
     foreach (int version, config.versionList())
         emit dictionaryDirectoryChanged(version, config.dictionaryPath(version));
 
-    m_config = config;
+    _config = config;
 }
