@@ -6,6 +6,10 @@
 
 QT       += core gui xml phonon
 
+QMAKE_CXXFLAGS += -std=c++11 -Wall -Wextra -Winline -Winvalid-pch \
+    -Wctor-dtor-privacy -Wold-style-cast -Woverloaded-virtual -Wformat=2 \
+    -Wshadow -pedantic # -Weffc++
+
 TARGET = ydpd
 TEMPLATE = app
 
@@ -48,91 +52,3 @@ RESOURCES += \
 RC_FILE = ydpd.rc
 
 OTHER_FILES +=
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
