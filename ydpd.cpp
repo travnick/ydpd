@@ -36,12 +36,11 @@
 
 const int Ydpd::_addItemToHistoryTimerInterval  = 2000;
 
-Ydpd::Ydpd(QWidget *parent) :
-    QWidget(parent),
+Ydpd::Ydpd(QWidget *parent_) :
+    QWidget(parent_),
     ui(new Ui::Ydpd)
 {
     ui->setupUi(this);
-    setLayout(ui->mainLayout);
 
     connect(&IDictManager::instance(), SIGNAL(dictionaryChanged(int)), this, SLOT(onDictionaryChanged(int)));
     connect(ui->splitter, SIGNAL(splitterMoved(int,int)), this, SLOT(onSplitterChanged()));
@@ -49,7 +48,7 @@ Ydpd::Ydpd(QWidget *parent) :
 
 void Ydpd::onSplitterChanged()
 {
-    IConfigManager::instance().config().setSplitters(QPair<int, int>(ui->splitter->sizes().at(0),
+    IConfigManager::instance().getConfig().setSplitters(QPair<int, int>(ui->splitter->sizes().at(0),
                                                                      ui->splitter->sizes().at(1)));
 }
 
@@ -57,11 +56,11 @@ void Ydpd::init()
 {
     IConfigManager& confMan = IConfigManager::instance();
 #ifndef PLASMA
-    setGeometry(confMan.config().geometry());
+    setGeometry(confMan.getConfig().geometry());
 #endif
     QList<int> list;
-    list.append(confMan.config().getSplitters().first);
-    list.append(confMan.config().getSplitters().second);
+    list.append(confMan.getConfig().getSplitters().first);
+    list.append(confMan.getConfig().getSplitters().second);
     ui->splitter->setSizes(list);
     ui->historyComboBox->setCompleter(nullptr);
 
@@ -73,10 +72,10 @@ void Ydpd::init()
     createMenu();
     initWidgets();
 
-    _clipboardAction->setChecked(confMan.config().clipboard());
-    _selfSelectionAction->setChecked(confMan.config().selfSelection());
-    _alwaysOnTopAction->setChecked(confMan.config().alwaysOnTop());
-    _autoShowWindowAction->setChecked(confMan.config().autoShowWindow());
+    _clipboardAction->setChecked(confMan.getConfig().clipboard());
+    _selfSelectionAction->setChecked(confMan.getConfig().selfSelection());
+    _alwaysOnTopAction->setChecked(confMan.getConfig().alwaysOnTop());
+    _autoShowWindowAction->setChecked(confMan.getConfig().autoShowWindow());
 
     QShortcut *changeDictShortcut = new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_D), this);
     connect(changeDictShortcut, SIGNAL(activated()), this, SLOT(changeDictionary()));
@@ -458,23 +457,23 @@ void Ydpd::setFocusOnLineEdit()
     ui->historyComboBox->lineEdit()->setFocus();
 }
 
-bool Ydpd::event(QEvent *event)
+bool Ydpd::event(QEvent *event_)
 {
-    if (event->type() == QEvent::WindowActivate)
+    if (event_->type() == QEvent::WindowActivate)
         setFocusOnLineEdit();
 
-    return QWidget::event(event);
+    return QWidget::event(event_);
 }
 
-void Ydpd::moveEvent (QMoveEvent* event)
+void Ydpd::moveEvent (QMoveEvent* )
 {
-    IConfigManager::instance().config().setGeometry(geometry());
+    IConfigManager::instance().getConfig().setGeometry(geometry());
 }
 
 
-void Ydpd::resizeEvent (QResizeEvent* event)
+void Ydpd::resizeEvent (QResizeEvent* )
 {
-    IConfigManager::instance().config().setGeometry(geometry());
+    IConfigManager::instance().getConfig().setGeometry(geometry());
 }
 
 void Ydpd::configuration()
@@ -482,10 +481,10 @@ void Ydpd::configuration()
     ConfigTabDialog configDialog;
     IConfigManager&  confMan = IConfigManager::instance();
 
-    configDialog.setConfig(confMan.config());
+    configDialog.setConfig(confMan.getConfig());
     if (configDialog.exec() == QDialog::Accepted)
     {
-        confMan.setConfig(configDialog.config());
+        confMan.setConfig(configDialog.getConfig());
         confMan.save();
         IDictManager::instance().init();
         initWidgets();
@@ -511,7 +510,8 @@ void Ydpd::on_playToolButton_clicked()
 {
     int index = ui->entriesListView->currentIndex().row();
 #ifdef Q_WS_X11
-    Phonon::createPlayer(Phonon::MusicCategory, Phonon::MediaSource(wavFilePath(index)))->play();
+    QUrl url = QUrl::fromLocalFile(wavFilePath(index));
+    Phonon::createPlayer(Phonon::MusicCategory, Phonon::MediaSource(url))->play();
 #else
     QSound::play(wavFilePath(index));
 #endif
@@ -537,12 +537,12 @@ void Ydpd::clearLineEdit()
 void Ydpd::onDictionaryChanged(int type)
 {
     emit dictionaryChanged(type);
-    IConfigManager::instance().config().setRecentDictionary(type);
+    IConfigManager::instance().getConfig().setRecentDictionary(type);
 }
 
 void Ydpd::about()
 {
-    QMessageBox::about(this, "O aplikacji", "version 0.5 \n\nMarcin Nawrocki\nmar.nawrocki@gmail.com");
+    QMessageBox::about(this, "O aplikacji", "version 0.5.1 \n\nMarcin Nawrocki\nmar.nawrocki@gmail.com");
 }
 
 void Ydpd::updateCheckboxes(bool enable)

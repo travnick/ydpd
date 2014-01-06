@@ -78,7 +78,7 @@ DictManager::DictManager() :
 
     foreach (int version, DictInstance::versionList())
     {
-        IDictionary* dict = IDictionary::createInstance(version, confMan.config().dictionaryPath(version));
+        IDictionary* dict = IDictionary::createInstance(version, confMan.getConfig().getDictionaryPath(version));
         _dictionaries[version] = dict;
         QObject::connect(&confMan, SIGNAL(dictionaryDirectoryChanged(int, QString)), dict, SLOT(initialize(int, QString)));
     }
@@ -121,15 +121,15 @@ void DictManager::init()
 {
     IConfigManager& confMan = IConfigManager::instance();
 
-    if (confMan.config().dictionaryToOpen() == Recent)
+    if (confMan.getConfig().dictionaryToOpen() == Recent)
     {
-        _version   = YdpTypes::typeToVersion(confMan.config().recentDictionary());
-        _direction = YdpTypes::typeToDirection(confMan.config().recentDictionary());
+        _version   = YdpTypes::typeToVersion(confMan.getConfig().recentDictionary());
+        _direction = YdpTypes::typeToDirection(confMan.getConfig().recentDictionary());
     }
     else
     {
-        _version   = YdpTypes::typeToVersion(confMan.config().selectedDictionary());
-        _direction = YdpTypes::typeToDirection(confMan.config().selectedDictionary());
+        _version   = YdpTypes::typeToVersion(confMan.getConfig().selectedDictionary());
+        _direction = YdpTypes::typeToDirection(confMan.getConfig().selectedDictionary());
     }
 
     if (YdpTypes::InvalidVersion == _version || !_dictionaries[_version]->isValid())
@@ -145,22 +145,22 @@ void DictManager::initHistory()
 {
     IConfigManager& confMan = IConfigManager::instance();
 
-    foreach (HistoryItem historyItem, confMan.config().history())
+    foreach (HistoryItem historyItem, confMan.getConfig().history())
     {
-        YdpTypes::YdpDirection direction = YdpTypes::typeToDirection(historyItem.type());
-        YdpTypes::YdpVersion   version   = YdpTypes::typeToVersion(historyItem.type());
+        YdpTypes::YdpDirection direction = YdpTypes::typeToDirection(historyItem.getType());
+        YdpTypes::YdpVersion   version   = YdpTypes::typeToVersion(historyItem.getType());
         IDictionary*           dict      = _dictionaries[version];
 
         if (!dict->isValid())
             continue;
 
-        if (_historyModel->rowCount() == confMan.config().maxNumberOfHistoryItems())
+        if (_historyModel->rowCount() == confMan.getConfig().maxNumberOfHistoryItems())
             break;
 
         QStandardItem *item = new QStandardItem();
-        item->setText(historyItem.text());
-        item->setIcon(QIcon(DictInstance::dictInst(version).iconName(direction)));
-        item->setData(QVariant(historyItem.type()), Qt::UserRole);
+        item->setText(historyItem.getText());
+        item->setIcon(QIcon(DictInstance::dictInst(version).getIconName(direction)));
+        item->setData(QVariant(historyItem.getType()), Qt::UserRole);
         _historyModel->appendRow(item);
     }
 }
@@ -169,16 +169,16 @@ void DictManager::insertHistoryItem(QString text)
 {
     QStandardItem *item = new QStandardItem();
     item->setText(text);
-    item->setIcon(QIcon(DictInstance::dictInst(_version).iconName(_direction)));
+    item->setIcon(QIcon(DictInstance::dictInst(_version).getIconName(_direction)));
     item->setData(QVariant(_version + _direction), Qt::UserRole);
     _historyModel->insertRow(0, item);
     const int rowCount = _historyModel->rowCount();
-    if (rowCount > IConfigManager::instance().config().maxNumberOfHistoryItems())
+    if (rowCount > IConfigManager::instance().getConfig().maxNumberOfHistoryItems())
     {
         delete _historyModel->item(rowCount-1);
         _historyModel->removeRow(rowCount-1);
     }
-    IConfigManager::instance().config().insertHistoryItem(text, _version + _direction);
+    IConfigManager::instance().getConfig().insertHistoryItem(text, _version + _direction);
 }
 
 void DictManager::initDictionary()
@@ -188,9 +188,9 @@ void DictManager::initDictionary()
         if (_dictionaries[version]->isValid())
         {
             QStandardItem *item = new QStandardItem();
-            DictInst instance = DictInstance::dictInst(version);
-            item->setText(instance.description());
-            item->setIcon(QIcon(instance.iconName(YdpTypes::Foreign)));
+            DictInst dictInstance = DictInstance::dictInst(version);
+            item->setText(dictInstance.getDescription());
+            item->setIcon(QIcon(dictInstance.getIconName(YdpTypes::Foreign)));
             item->setData(QVariant(version), Qt::UserRole);
             _dictionaryModel->appendRow(item);
         }
@@ -246,17 +246,17 @@ QString DictManager::entriesText(int index) const
 
 QString DictManager::foreignIconName() const
 {
-    return DictInstance::dictInst(_version).foreignIconName();
+    return DictInstance::dictInst(_version).getForeignIconName();
 }
 
 QString DictManager::tooltip() const
 {
-    return DictInstance::dictInst(_version).toolTip();
+    return DictInstance::dictInst(_version).getToolTip();
 }
 
 QString DictManager::wavFormat() const
 {
-    return DictInstance::dictInst(_version).wavFormat();
+    return DictInstance::dictInst(_version).getWavFormat();
 }
 
 void DictManager::invertDirection()
@@ -272,7 +272,7 @@ bool DictManager::isDirectionForeign() const
 
 QString DictManager::samplesPath() const
 {
-    return IConfigManager::instance().config().samplesPath(_version);
+    return IConfigManager::instance().getConfig().samplesPath(_version);
 }
 
 void DictManager::setVersion(int dictionaryIndex)

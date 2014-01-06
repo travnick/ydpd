@@ -23,8 +23,8 @@
 #include "ydptypes.h"
 #include "config.h"
 
-ConfigTabDialog::ConfigTabDialog(QWidget *parent) :
-    QDialog(parent)
+ConfigTabDialog::ConfigTabDialog(QWidget *parent_) :
+    QDialog(parent_)
 {
     QWidget *pStartupWidget = new QWidget;
     _startupForm.setupUi(pStartupWidget);
@@ -52,13 +52,13 @@ ConfigTabDialog::ConfigTabDialog(QWidget *parent) :
     foreach (int version, DictInstance::versionList())
     {
         const DictInst& instance = DictInstance::dictInst(version);
-        _pathsWidget.addDictionary(instance.foreignIconName(),
-                                    instance.description(), version);
-        _startupForm.selectedComboBox->addItem(QIcon(instance.foreignIconName()),
-                                                instance.description(),
+        _pathsWidget.addDictionary(instance.getForeignIconName(),
+                                    instance.getDescription(), version);
+        _startupForm.selectedComboBox->addItem(QIcon(instance.getForeignIconName()),
+                                                instance.getDescription(),
                                                 QVariant(version+YdpTypes::Foreign));
-        _startupForm.selectedComboBox->addItem(QIcon(instance.nativeIconName()),
-                                                instance.description(),
+        _startupForm.selectedComboBox->addItem(QIcon(instance.getNativeIconName()),
+                                                instance.getDescription(),
                                                 QVariant(version+YdpTypes::Native));
     }
 }
@@ -67,7 +67,7 @@ void ConfigTabDialog::setConfig(const Config& config)
 {
     foreach (int version, DictInstance::versionList())
     {
-        _pathsWidget.setDictionaryPath(version, config.dictionaryPath(version));
+        _pathsWidget.setDictionaryPath(version, config.getDictionaryPath(version));
         _pathsWidget.setSamplesPath(version, config.samplesPath(version));
     }
     (config.dictionaryToOpen() ? _startupForm.selectedRadioButton : _startupForm.recentlyUsedRadioButton)->setChecked(true);
@@ -79,7 +79,7 @@ void ConfigTabDialog::setConfig(const Config& config)
     _config = config;
 }
 
-Config ConfigTabDialog::config()
+Config ConfigTabDialog::getConfig()
 {
     _config.setDictionaryToOpen(_startupForm.selectedRadioButton->isChecked());
     int index = _startupForm.selectedComboBox->currentIndex();

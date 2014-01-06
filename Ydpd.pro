@@ -7,13 +7,15 @@
 QT       += core gui xml phonon
 
 QMAKE_CXXFLAGS += -std=c++11 -Wall -Wextra -Winline -Winvalid-pch \
-    -Wctor-dtor-privacy -Wold-style-cast -Woverloaded-virtual -Wformat=2 \
-    -Wshadow -pedantic # -Weffc++
+    -Wold-style-cast -Woverloaded-virtual -Wformat=2 \
+    -pedantic #-Wshadow #-Weffc++
 
 QMAKE_CFLAGS += -std=c11
 
 QMAKE_CFLAGS_RELEASE += -O3
 QMAKE_CXXFLAGS_RELEASE += -O3
+
+LIBS += -lydpdict
 
 TARGET = ydpd
 TEMPLATE = app
@@ -23,7 +25,6 @@ Ydpd.path = /usr/local/bin
 INSTALLS += ydpd
 
 SOURCES += main.cpp\
-    libydpdict/ydpdict.c \
     dictmanager.cpp \
     config.cpp \
     configmanager.cpp \
@@ -34,7 +35,6 @@ SOURCES += main.cpp\
     ydpd.cpp
 
 HEADERS  += \
-    libydpdict/ydpdict.h \
     dictmanager.h \
     config.h \
     configmanager.h \

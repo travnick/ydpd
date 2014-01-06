@@ -17,8 +17,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef CONFIGMANAGER_H
-#define CONFIGMANAGER_H
+#pragma once
 
 #include <QObject>
 #include "config.h"
@@ -30,7 +29,7 @@ public:
     static IConfigManager& instance();
     virtual bool save() const = 0;
     virtual bool load() = 0;
-    virtual Config& config() = 0;
+    virtual Config& getConfig() = 0;
     void setConfig(const Config& config);
 signals:
     void dictionaryDirectoryChanged(int version, QString dictionaryPath);
@@ -44,5 +43,3 @@ protected:
     virtual ~IConfigManager() {}
     Config _config;
 };
-
-#endif // CONFIGMANAGER_H

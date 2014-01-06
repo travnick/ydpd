@@ -17,8 +17,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef DICTMANAGER_H
-#define DICTMANAGER_H
+#pragma once
 
 #include "QAbstractItemModel"
 
@@ -59,5 +58,3 @@ protected:
     IDictManager() {}
     virtual ~IDictManager() {}
 };
-
-#endif // DICTMANAGER_H

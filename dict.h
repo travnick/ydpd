@@ -17,8 +17,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef DICT_H
-#define DICT_H
+#pragma once
 
 #include <QString>
 #include <QStringList>
@@ -39,6 +38,3 @@ protected:
     IDictionary() {}
     virtual ~IDictionary() {}
 };
-
-
-#endif // DICT_H

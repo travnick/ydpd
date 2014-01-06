@@ -17,8 +17,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef CONFIG_H
-#define CONFIG_H
+#pragma once
 
 #include <QString>
 #include <QRect>
@@ -30,8 +29,8 @@ class HistoryItem
 {
 public:
     HistoryItem(QString text, int type) : _text(text), _type(type) {}
-    QString text() const { return _text; }
-    int type() const { return _type; }
+    QString getText() const { return _text; }
+    int getType() const { return _type; }
 private:
     HistoryItem() {}
     QString _text;
@@ -43,9 +42,9 @@ class Paths
 public:
     Paths() {}
     void setDictionary(QString dictionary) { _dictionary = dictionary; }
-    QString dictionary() const { return _dictionary; }
+    QString getDictionary() const { return _dictionary; }
     void setSamples(QString samples) { _samples = samples; }
-    QString samples() const { return _samples; }
+    QString getSamples() const { return _samples; }
 private:
     QString _dictionary;
     QString _samples;
@@ -62,9 +61,9 @@ public:
     void insertHistoryItem(QString text, int type);
     void appendHistoryItem(QString text, int type);
     void setDictionaryPath(int version, QString path) { _paths[version].setDictionary(path); }
-    QString dictionaryPath(int version) const { return _paths[version].dictionary(); }
+    QString getDictionaryPath(int version) const { return _paths[version].getDictionary(); }
     void setSamplesPath(int version, QString path) { _paths[version].setSamples(path); }
-    QString samplesPath(int version) const { return _paths[version].samples(); }
+    QString samplesPath(int version) const { return _paths[version].getSamples(); }
     VersionList versionList() const { return _paths.keys(); }
     void setDictionaryToOpen(int value) { _dictionaryToOpen = value; }
     int dictionaryToOpen() const { return _dictionaryToOpen; }
@@ -105,5 +104,3 @@ private:
     QRect _geometry;
     QPair<int, int> _sizes;
 };
-
-#endif // CONFIG_H

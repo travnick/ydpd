@@ -20,8 +20,8 @@
 #include "pathswidget.h"
 #include <QFileDialog>
 
-PathsWidget::PathsWidget(QWidget *parent) :
-    QWidget(parent)
+PathsWidget::PathsWidget(QWidget *parent_) :
+    QWidget(parent_)
 {
     _pathsForm.setupUi(this);
 }

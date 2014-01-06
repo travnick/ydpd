@@ -17,8 +17,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef CONFIGTABDIALOG_H
-#define CONFIGTABDIALOG_H
+#pragma once
 
 #include <QDialog>
 #include "ui_startupForm.h"
@@ -32,12 +31,10 @@ class ConfigTabDialog : public QDialog
 public:
     explicit ConfigTabDialog(QWidget *parent = 0);
     void setConfig(const Config& config);
-    Config config();
+    Config getConfig();
 private:
     Ui_startupForm _startupForm;
     Ui_historyForm _historyForm;
     PathsWidget _pathsWidget;
     Config _config;
 };
-
-#endif // CONFIGTABDIALOG_H

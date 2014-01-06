@@ -29,12 +29,12 @@ DictInst::DictInst(QString description, QString toolTip, QString foreignIconName
     _iconName[YdpTypes::Native]  = nativeIconName;
 }
 
-QString DictInst::foreignIconName() const
+QString DictInst::getForeignIconName() const
 {
     return _iconName[YdpTypes::Foreign];
 }
 
-QString DictInst::nativeIconName() const
+QString DictInst::getNativeIconName() const
 {
     return _iconName[YdpTypes::Native];
 }

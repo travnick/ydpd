@@ -17,8 +17,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef YDPTYPES_H
-#define YDPTYPES_H
+#pragma once
 
 enum DictionaryToOpen
 {
@@ -55,21 +54,19 @@ public:
 
     static YdpDirection typeToDirection(int type)
     {
-        return (YdpDirection)(type % 100);
+        return static_cast<YdpDirection>(type % 100);
     }
 
     static YdpVersion typeToVersion(int type)
     {
-        return (YdpVersion)(type - typeToDirection(type));
+        return static_cast<YdpVersion>(type - typeToDirection(type));
     }
 
     static YdpDirection getOppositeDirection(int direction)
     {
-        return (YdpDirection)((direction + 1) % 2);
+        return static_cast<YdpDirection>((direction + 1) % 2);
     }
 
 private:
     YdpTypes() {}
 };
-
-#endif // YDPTYPES_H

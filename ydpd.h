@@ -17,8 +17,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef YDPD_H
-#define YDPD_H
+#pragma once
 
 #include <QModelIndex>
 #include <QClipboard>
@@ -98,5 +97,3 @@ private:
     QAction *_autoShowWindowAction;
     const static int _addItemToHistoryTimerInterval;
 };
-
-#endif // YDPD_H

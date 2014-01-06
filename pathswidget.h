@@ -17,8 +17,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef PATHSWIDGET_H
-#define PATHSWIDGET_H
+#pragma once
 
 #include <QMap>
 #include <QWidget>
@@ -47,5 +46,3 @@ private slots:
     void on_dictDirToolButton_clicked();
     void on_sampleDirToolButton_clicked();
 };
-
-#endif // PATHSWIDGET_H

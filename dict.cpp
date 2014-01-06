@@ -21,7 +21,7 @@
 #include "ydptypes.h"
 #include <QMap>
 extern "C" {
-#include "libydpdict/ydpdict.h"
+#include "ydpdict/ydpdict.h"
 }
 
 typedef QMap<int, QStringList> DirectionToStringListMap;

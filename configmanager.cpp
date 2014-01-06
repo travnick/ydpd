@@ -27,7 +27,7 @@ public:
     ~ConfigManager();
     bool save() const;
     bool load();
-    Config& config();
+    Config& getConfig();
     void setConfig(const Config& config);
 signals:
     void dictionaryDirectoryChanged(int version, QString dictionaryPath);
@@ -119,7 +119,7 @@ ConfigManager::~ConfigManager()
     save();
 }
 
-Config& ConfigManager::config()
+Config& ConfigManager::getConfig()
 {
     return _config;
 }
@@ -161,7 +161,8 @@ bool ConfigManager::loadHistory(QDomElement& root, Config& config)
         return false;
     config.setMaxNumberOfHistoryItems(attribute.value().toInt());
     list = element.elementsByTagName(_historyItemTagName);
-    for (uint index = 0; index < list.length() && index < (uint)config.maxNumberOfHistoryItems(); index++)
+    uint maxNumberOfHistoryItems = config.maxNumberOfHistoryItems();
+    for (uint index = 0; index < list.length() && index < maxNumberOfHistoryItems; index++)
     {
         element = list.item(index).toElement();
         if (!element.hasAttribute(_historyItemTypeAttribName) || !element.hasAttribute(_historyItemTextAttribName))
@@ -321,8 +322,8 @@ bool ConfigManager::save() const
     for (int index = 0; index < _config.history().length() && index < _config.maxNumberOfHistoryItems() && _config.storeHistory(); index++)
     {
         QDomElement subElement = config.createElement(_historyItemTagName);
-        subElement.setAttribute(_historyItemTypeAttribName, _config.history().at(index).type());
-        subElement.setAttribute(_historyItemTextAttribName, _config.history().at(index).text());
+        subElement.setAttribute(_historyItemTypeAttribName, _config.history().at(index).getType());
+        subElement.setAttribute(_historyItemTextAttribName, _config.history().at(index).getText());
         element.appendChild(subElement);
     }
     root.appendChild(element);
@@ -331,7 +332,7 @@ bool ConfigManager::save() const
     {
         element = config.createElement(_dictTagName);
         element.setAttribute(_dictVersionAttribName, version);
-        element.setAttribute(_dictDataPathAttribName, _config.dictionaryPath(version));
+        element.setAttribute(_dictDataPathAttribName, _config.getDictionaryPath(version));
         element.setAttribute(_dictSamplesPathAttribName, _config.samplesPath(version));
         root.appendChild(element);
     }
@@ -375,7 +376,7 @@ IConfigManager& IConfigManager::instance()
 void IConfigManager::setConfig(const Config& config)
 {
     foreach (int version, config.versionList())
-        emit dictionaryDirectoryChanged(version, config.dictionaryPath(version));
+        emit dictionaryDirectoryChanged(version, config.getDictionaryPath(version));
 
     _config = config;
 }

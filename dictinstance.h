@@ -17,8 +17,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#ifndef DICTINSTANCE_H
-#define DICTINSTANCE_H
+#pragma once
 
 #include <QString>
 #include <QList>
@@ -29,12 +28,12 @@ class DictInst
 public:
     DictInst(QString description, QString toolTip, QString foreignIconName, QString nativeIconName, QString wavFormat);
     DictInst() {}
-    QString description() const { return _description; }
-    QString toolTip() const { return _toolTip; }
-    QString iconName(int direction) const { return _iconName[direction]; }
-    QString foreignIconName() const;
-    QString nativeIconName() const;
-    QString wavFormat() const { return _wavFormat; }
+    QString getDescription() const { return _description; }
+    QString getToolTip() const { return _toolTip; }
+    QString getIconName(int direction) const { return _iconName[direction]; }
+    QString getForeignIconName() const;
+    QString getNativeIconName() const;
+    QString getWavFormat() const { return _wavFormat; }
 private:
     QString _description;
     QString _toolTip;
@@ -62,5 +61,3 @@ private:
     static const VersionToDictInstMap _instances;
     static VersionToDictInstMap mapInit();
 };
-
-#endif // DICTINSTANCE_H
